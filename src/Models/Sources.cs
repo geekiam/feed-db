@@ -28,11 +28,17 @@ public partial class Sources : BaseEntity, IValidatableObject
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
+        if(string.IsNullOrEmpty(Name))
+            yield return new ValidationResult(Models.SourceNameIsRequired);
+        
         if (Name.Equals(Domain))
         {
             yield return new ValidationResult(Models.NameCannotBeDomain);
         }
 
+        if(string.IsNullOrEmpty(FeedUrl))
+            yield return new ValidationResult(Models.FeedUrlIsRequired);
+        
         if (FeedUrl.Equals(Domain))
         {
             yield return new ValidationResult(Models.DomainCannotBeFeedUrl);

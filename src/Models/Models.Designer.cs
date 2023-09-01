@@ -28,7 +28,7 @@ namespace Models {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Models.Models", typeof(Models).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Geekiam.Models", typeof(Models).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -78,6 +78,18 @@ namespace Models {
         internal static string InvalidUrlFormat {
             get {
                 return ResourceManager.GetString("InvalidUrlFormat", resourceCulture);
+            }
+        }
+        
+        internal static string FeedUrlIsRequired {
+            get {
+                return ResourceManager.GetString("FeedUrlIsRequired", resourceCulture);
+            }
+        }
+        
+        internal static string SourceNameIsRequired {
+            get {
+                return ResourceManager.GetString("SourceNameIsRequired", resourceCulture);
             }
         }
     }

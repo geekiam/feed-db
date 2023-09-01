@@ -36,4 +36,10 @@
     <data name="InvalidUrlFormat" xml:space="preserve">
         <value>AN Invalid Url has been provided</value>
     </data>
+    <data name="FeedUrlIsRequired" xml:space="preserve">
+        <value>A feed Url is Required</value>
+    </data>
+    <data name="SourceNameIsRequired" xml:space="preserve">
+        <value>A source name is required</value>
+    </data>
 </root>
