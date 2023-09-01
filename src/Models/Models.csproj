@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+<ItemGroup>
+    <PackageReference Include="Threenine.Database.Configuration" Version="0.2.10" />
+</ItemGroup>
+
+<ItemGroup>
+  <EmbeddedResource Update="Models.resx">
+    <Generator>ResXFileCodeGenerator</Generator>
+    <LastGenOutput>Models.Designer.cs</LastGenOutput>
+  </EmbeddedResource>
+</ItemGroup>
+
+<ItemGroup>
+  <Compile Update="Models.Designer.cs">
+    <DesignTime>True</DesignTime>
+    <AutoGen>True</AutoGen>
+    <DependentUpon>Models.resx</DependentUpon>
+  </Compile>
+</ItemGroup>
+
+</Project>

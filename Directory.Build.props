@@ -1,0 +1,22 @@
+<Project>
+    <PropertyGroup>
+        <Authors>threenine.co.uk</Authors>
+        <TargetFramework>net7.0</TargetFramework>
+        <Title>Geekiam Feeds</Title>
+        <Description>Feed Management Database </Description>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>rss, dotnet, feeds</PackageTags>
+        <RepositoryUrl>https://github.com/geekiam/paybolt</RepositoryUrl>
+        <Copyright>Copyright © $([System.DateTime]::Now.ToString("yyyy")) Three Nine Consulting Limited</Copyright>
+        <PackageProjectUrl>https://www.threenine.co.uk/feed-db</PackageProjectUrl>
+        <license>https://github.com/geekiam/feed-db/blob/master/LICENSE</license>
+        <PackageIcon>icon.png</PackageIcon>
+        <Version></Version>
+        <RootNamespace>Geekiam</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="/">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+</Project>
