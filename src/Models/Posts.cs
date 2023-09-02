@@ -3,15 +3,15 @@ using Threenine.Models;
 
 namespace Models;
 
-public class Posts: BaseEntity, IValidatableObject
+public sealed class Posts: BaseEntity, IValidatableObject
 {
-    public string Title { get; set; }
-    public string Summary { get; set; }
-    public string Description { get; set; }
-    public string Permalink { get; set; }
+    public string Title { get; set; } = null!;
+    public string Summary { get; set; } = null!;
+    public string Description { get; set; } = null!;
+    public string Permalink { get; set; } = null!;
     public DateTime Published { get; set; }
     
-    public virtual Sources Source { get; set; }
+    public Sources Source { get; set; } = null!;
     
     public Guid SourceId { get; set; }
     

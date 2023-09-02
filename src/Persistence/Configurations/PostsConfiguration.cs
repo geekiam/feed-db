@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Models;
 using Threenine.Configurations.PostgreSql;
+using Threenine.Database.Configuration.PostgreSql;
 
 namespace Persistence.Configurations;
 

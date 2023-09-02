@@ -5,12 +5,12 @@ using Threenine.Models;
 
 namespace Models;
 
-public class Categories : BaseEntity, IValidatableObject
+public sealed class Categories : BaseEntity, IValidatableObject
 {
-    public string Name { get; set; }
-    public string Permalink { get; set; }
-    
-    public virtual ICollection<SourceCategory> Sources { get; set; }
+    public string Name { get; set; } = null!;
+    public string Permalink { get; set; } = null!;
+
+    public ICollection<SourceCategory> Sources { get; set; } = null!;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {

@@ -28,6 +28,15 @@ public class SourcesTestData : IEnumerable<object[]>
         {
             Builder<Sources>.CreateNew()
                 .With(x => x.Domain = "test.com")
+                .With(x => x.Name = string.Empty)
+                .With(x => x.FeedUrl = "/test1")
+                .Build(),
+            1, "Name should not be empty"
+        };
+        yield return new object[]
+        {
+            Builder<Sources>.CreateNew()
+                .With(x => x.Domain = "test.com")
                 .With(x => x.Name = "test.com")
                 .Build(),
             2, "Domain is the same as Name and name is an absolute URL"
@@ -45,32 +54,24 @@ public class SourcesTestData : IEnumerable<object[]>
         yield return new object[]
         {
             Builder<Sources>.CreateNew()
-                .With(x => x.Domain = "https://test.com")
+                .With(x => x.Domain = "test.com")
                 .With(x => x.Name = "test")
-                .With(x => x.FeedUrl = "https://test.com")
+                .With(x => x.FeedUrl = "test.com")
                 .Build(),
-            3, "Domain is the same as FeedLink"
-        };
-        
-        yield return new object[]
-        {
-            Builder<Sources>.CreateNew()
-                .With(x => x.Domain = "https://test.com")
-                .With(x => x.Name = "test")
-                .With(x => x.FeedUrl = "https://test1.com")
-                .Build(),
-            2, "FeedLink should be relative"
+            2, "Domain is the same as FeedLink"
         };
         
         yield return new object[]
         {
             Builder<Sources>.CreateNew()
                 .With(x => x.Domain = "test.com")
-                .With(x => x.Name = string.Empty)
-                .With(x => x.FeedUrl = "/test1")
+                .With(x => x.Name = "test")
+                .With(x => x.FeedUrl = "https://test1.com")
                 .Build(),
-            1, "Name should not be empty"
+            1, "FeedLink should be relative"
         };
+        
+     
         
     }
 
