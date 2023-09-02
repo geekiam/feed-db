@@ -34,5 +34,5 @@ jobs:
           token: ${{ github.token }}
           name: Code Coverage
           conclusion: ${{ job.status }}
-          output: '{"summary":"Code Coverage Summary Report for  Geekiam Feeds Database}'
+          output: '{"summary":"Code Coverage Summary Report for  Geekiam Feeds Database"}'
           output_text_description_file: coverage/summary/SummaryGithub.md
