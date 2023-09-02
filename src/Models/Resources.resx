@@ -39,10 +39,13 @@
     <data name="FeedUrlIsRequired" xml:space="preserve">
         <value>A feed Url is Required</value>
     </data>
-    <data name="SourceNameIsRequired" xml:space="preserve">
-        <value>A source name is required</value>
+    <data name="NameIsRequired" xml:space="preserve">
+        <value>A name is required</value>
     </data>
     <data name="InvalidUrl" xml:space="preserve">
         <value>An Invalid Url has been provided</value>
+    </data>
+    <data name="ValidUriRequired" xml:space="preserve">
+        <value>A valid Uri is required</value>
     </data>
 </root>

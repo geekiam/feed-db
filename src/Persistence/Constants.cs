@@ -1,4 +1,4 @@
-namespace Persistence;
+namespace Geekiam.Persistence;
 
 internal static class DefaultSchema
 {

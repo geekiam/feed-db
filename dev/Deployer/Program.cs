@@ -1,11 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Geekiam.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualBasic;
-using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Test_DB");

@@ -4,7 +4,7 @@ using Models;
 using Threenine.Configurations.PostgreSql;
 using Threenine.Database.Configuration.PostgreSql;
 
-namespace Geekiam.Configurations;
+namespace Geekiam.Persistence.Configurations;
 
 public class CategoriesConfiguration : BaseEntityTypeConfiguration<Categories>
 {
@@ -14,11 +14,7 @@ public class CategoriesConfiguration : BaseEntityTypeConfiguration<Categories>
             .IsRequired()
             .HasColumnType(ColumnTypes.Varchar)
             .HasMaxLength(65);
-
-        builder.Property(x => x.Permalink)
-            .IsRequired()
-            .HasColumnType(ColumnTypes.Varchar)
-            .HasMaxLength(255);
+        
         
         base.Configure(builder);
     }

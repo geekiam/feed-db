@@ -4,7 +4,7 @@ using Models;
 using Threenine.Configurations.PostgreSql;
 using Threenine.Database.Configuration.PostgreSql;
 
-namespace Geekiam.Configurations;
+namespace Geekiam.Persistence.Configurations;
 
 public class SourceCategoryConfiguration : BaseEntityTypeConfiguration<SourceCategory>
 {

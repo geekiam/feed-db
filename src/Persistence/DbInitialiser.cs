@@ -1,7 +1,6 @@
-using System.Linq;
 using Models;
 
-namespace Persistence;
+namespace Geekiam.Persistence;
 
 public static class DbInitialiser
 {

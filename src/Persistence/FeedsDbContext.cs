@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Threenine;
 using Threenine.Configurations.PostgreSql;
 
-namespace Persistence;
+namespace Geekiam.Persistence;
 
 public class FeedsDbContext : BaseContext<FeedsDbContext>
 {
