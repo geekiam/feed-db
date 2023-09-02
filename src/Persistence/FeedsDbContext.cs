@@ -1,10 +1,11 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Threenine;
 using Threenine.Configurations.PostgreSql;
 
 namespace Geekiam.Persistence;
-
+[ExcludeFromCodeCoverage]
 public class FeedsDbContext : BaseContext<FeedsDbContext>
 {
     public FeedsDbContext(DbContextOptions<FeedsDbContext> options) : base(options)

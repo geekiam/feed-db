@@ -1,7 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
 using Models;
 
 namespace Geekiam.Persistence;
-
+[ExcludeFromCodeCoverage]
 public static class DbInitialiser
 {
     public static void Initialise(FeedsDbContext context)
