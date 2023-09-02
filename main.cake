@@ -97,7 +97,7 @@ Task("Test")
            ArgumentCustomization = args => args.Append($"-reportTypes:Html;MarkdownSummaryGithub")
         };
         ReportGenerator(glob, summaryDirectory, summarySettings);
-        BuildSystem.GitHubActions.Commands.UploadArtifact(summaryDirectory.ToString(),  '{"summary":"Code coverage"}');
+        BuildSystem.GitHubActions.Commands.UploadArtifact(summaryDirectory,  "bubababa");
       
       }
 });
