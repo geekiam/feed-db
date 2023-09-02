@@ -42,6 +42,78 @@ public static class DbInitialiser
         
         #endregion
         
+        #region Sources
+
+        // Initial seed with some default sources
+        if (!context.Set<Sources>().Any())
+        {
+            context.Set<Sources>().AddRange(
+                new Sources
+                {
+                    Id = Guid.Parse("56bdbe5f-4edc-4002-8a94-e053a0652c80"),
+                    Identifier = "g_garywoodfine_0001" ,
+                    Name = "Gary Woodfine",
+                    Description = "Opinionated Software Developer",
+                    Domain = "garywoodfine.com",
+                    FeedUrl = "/feed",
+                    Protocol = "https",
+                    StatusId = 1,
+                    MediaTypeId = 4
+                },
+                new Sources
+                {
+                    Id = Guid.Parse("f9545f8f-b99d-4d02-8750-5f4471a7ba24"),
+                    Identifier = "g_cryptonews_0001" ,
+                    Name = "Crypto News",
+                    Description = "Latest Cryptocurrency News, Bitcoin News, Ethereum News and Price Data",
+                    Domain = "cryptonews.com",
+                    FeedUrl = "news/feed",
+                    Protocol = "https",
+                    StatusId = 1,
+                    MediaTypeId = 6
+                },
+                new Sources
+                {
+                    Id = Guid.Parse("e222d926-d171-44ab-a805-c7318afa5f27"),
+                    Identifier = "g_bitcoinmagazine_0001" ,
+                    Name = "Bitcoin Magazine",
+                    Description = "Bitcoin News, Articles and Expert Insights",
+                    Domain = "bitcoinmagazine.com",
+                    FeedUrl = "/.rss/full/",
+                    Protocol = "https",
+                    StatusId = 1,
+                    MediaTypeId = 5
+                },
+                new Sources
+                {
+                    Id = Guid.Parse("2aa5ceac-3a12-40f6-bb01-907ad669c66c"),
+                    Identifier = "g_cointelegraph_0001" ,
+                    Name = "Coin Telegraph",
+                    Description = "Bitcoin, Ethereum, Crypto News & Price Indexes",
+                    Domain = "cointelegraph.com",
+                    FeedUrl = "/rss",
+                    Protocol = "https",
+                    StatusId = 1,
+                    MediaTypeId = 6
+                },
+                new Sources
+                {
+                    Id = Guid.Parse("b445dcc8-c2b6-4717-9b50-8feaf933f48c"),
+                    Identifier = "g_bitcoinist_0001" ,
+                    Name = "Bitcoinist",
+                    Description = "Bitcoin news portal providing breaking news, guides, price and analysis about decentralized digital money and blockchain technology.",
+                    Domain = "bitcoinist.com",
+                    FeedUrl = "/feed",
+                    Protocol = "https",
+                    StatusId = 1,
+                    MediaTypeId = 6
+                }
+                
+                );
+        }
+        
+        #endregion
+        
         context.SaveChanges();
     }
 }

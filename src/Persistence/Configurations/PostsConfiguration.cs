@@ -9,8 +9,7 @@ public class PostsConfiguration : BaseEntityTypeConfiguration<Posts>
 {
     public override void Configure(EntityTypeBuilder<Posts> builder)
     {
-        builder.ToTable(nameof(Posts).ToLower());
-
+        
         builder.Property(x => x.Title)
             .HasColumnType(ColumnTypes.Varchar)
             .HasMaxLength(255)

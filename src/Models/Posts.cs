@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Threenine.Models;
 
@@ -11,8 +9,6 @@ public class Posts: BaseEntity, IValidatableObject
     public string Summary { get; set; }
     public string Description { get; set; }
     public string Permalink { get; set; }
-
-  
     public DateTime Published { get; set; }
     
     public virtual Sources Source { get; set; }
@@ -23,9 +19,14 @@ public class Posts: BaseEntity, IValidatableObject
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        if (!Uri.IsWellFormedUriString(Permalink, UriKind.RelativeOrAbsolute))
+        if(string.IsNullOrEmpty(Title))
         {
-            yield return new  ValidationResult($"{nameof(Permalink)} is not a valid url");
+            yield return new ValidationResult(Resources.NameRequired);
+        }
+        
+        if (!Uri.IsWellFormedUriString(Permalink, UriKind.Absolute))
+        {
+            yield return new  ValidationResult(Resources.InvalidUrl);
         }
     }
 }

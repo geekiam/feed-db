@@ -18,8 +18,11 @@ public partial class Sources : BaseEntity, IValidatableObject
     public int StatusId { get; set; }
     public virtual Status Status { get; set; }
     
-    public virtual ICollection<Posts> Posts { get; set; }
+    public int MediaTypeId { get; set; }
+    public virtual MediaTypes MediaType { get; set; }
     
+    public virtual ICollection<Posts> Posts { get; set; }
+    public virtual ICollection<SourceCategory> Categories { get; set; }
     
     public override string ToString()
     {
@@ -29,29 +32,29 @@ public partial class Sources : BaseEntity, IValidatableObject
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if(string.IsNullOrEmpty(Name))
-            yield return new ValidationResult(Models.SourceNameIsRequired);
+            yield return new ValidationResult(Resources.SourceNameIsRequired);
         
         if (Name.Equals(Domain))
         {
-            yield return new ValidationResult(Models.NameCannotBeDomain);
+            yield return new ValidationResult(Resources.NameCannotBeDomain);
         }
 
         if(string.IsNullOrEmpty(FeedUrl))
-            yield return new ValidationResult(Models.FeedUrlIsRequired);
+            yield return new ValidationResult(Resources.FeedUrlIsRequired);
         
         if (FeedUrl.Equals(Domain))
         {
-            yield return new ValidationResult(Models.DomainCannotBeFeedUrl);
+            yield return new ValidationResult(Resources.DomainCannotBeFeedUrl);
         }
         
         if (!domainNameRegex().Match(Domain).Success)
         {
-            yield return new ValidationResult(Models.InvalidDomainName);
+            yield return new ValidationResult(Resources.InvalidDomainName);
         }
         
         if (!feedUrlRegex().Match(FeedUrl).Success)
         {
-            yield return new ValidationResult(Models.RelativePathRequired);
+            yield return new ValidationResult(Resources.RelativePathRequired);
         }
     }
 

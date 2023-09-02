@@ -2,8 +2,10 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f46f72a6_002De573_002D4be1_002D9da2_002Dd6a13e9572b8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SHouldValidateSourceForEmptyName" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::2338A771-7AEB-4917-8BEF-63C31175C0CE::net7.0::Geekiam.ValidationTests.SourcesTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::2338A771-7AEB-4917-8BEF-63C31175C0CE::net7.0::Geekiam.ValidationTests.PostsTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FModels_002FModels/@EntryIndexedValue">True</s:Boolean>
+	
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FModels_002FResources/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>
 	</wpf:ResourceDictionary>

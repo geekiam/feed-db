@@ -12,6 +12,6 @@ public class Status : ValueListEntity, IValidatableObject
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         if(string.IsNullOrEmpty(Name))
-            yield return new ValidationResult(Models.StatusNameRequired);
+            yield return new ValidationResult(Resources.NameRequired);
     }
 }

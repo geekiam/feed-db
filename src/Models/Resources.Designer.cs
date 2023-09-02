@@ -14,21 +14,21 @@ namespace Models {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Models {
+    internal class Resources {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Models() {
+        internal Resources() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Geekiam.Models", typeof(Models).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Geekiam.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -69,9 +69,9 @@ namespace Models {
             }
         }
         
-        internal static string StatusNameRequired {
+        internal static string NameRequired {
             get {
-                return ResourceManager.GetString("StatusNameRequired", resourceCulture);
+                return ResourceManager.GetString("NameRequired", resourceCulture);
             }
         }
         
@@ -90,6 +90,12 @@ namespace Models {
         internal static string SourceNameIsRequired {
             get {
                 return ResourceManager.GetString("SourceNameIsRequired", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidUrl {
+            get {
+                return ResourceManager.GetString("InvalidUrl", resourceCulture);
             }
         }
     }

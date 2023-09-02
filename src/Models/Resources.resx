@@ -30,8 +30,8 @@
     <data name="RelativePathRequired" xml:space="preserve">
         <value>A relative Path is required</value>
     </data>
-    <data name="StatusNameRequired" xml:space="preserve">
-        <value>A status name is required</value>
+    <data name="NameRequired" xml:space="preserve">
+        <value>Name is a required field</value>
     </data>
     <data name="InvalidUrlFormat" xml:space="preserve">
         <value>AN Invalid Url has been provided</value>
@@ -41,5 +41,8 @@
     </data>
     <data name="SourceNameIsRequired" xml:space="preserve">
         <value>A source name is required</value>
+    </data>
+    <data name="InvalidUrl" xml:space="preserve">
+        <value>An Invalid Url has been provided</value>
     </data>
 </root>

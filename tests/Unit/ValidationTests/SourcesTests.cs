@@ -1,11 +1,8 @@
 using System.Collections;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using FizzWare.NBuilder;
-using Microsoft.EntityFrameworkCore;
 using Models;
 using Shouldly;
-using Xunit;
 
 namespace Geekiam.ValidationTests;
 
@@ -33,7 +30,7 @@ public class SourcesTestData : IEnumerable<object[]>
                 .With(x => x.Domain = "test.com")
                 .With(x => x.Name = "test.com")
                 .Build(),
-            2, "Domain and Name have the same values and Domain is not an absolute URL"
+            2, "Domain is the same as Name and name is an absolute URL"
         };
         
         yield return new object[]
@@ -63,6 +60,16 @@ public class SourcesTestData : IEnumerable<object[]>
                 .With(x => x.FeedUrl = "https://test1.com")
                 .Build(),
             2, "FeedLink should be relative"
+        };
+        
+        yield return new object[]
+        {
+            Builder<Sources>.CreateNew()
+                .With(x => x.Domain = "test.com")
+                .With(x => x.Name = string.Empty)
+                .With(x => x.FeedUrl = "/test1")
+                .Build(),
+            1, "Name should not be empty"
         };
         
     }

@@ -9,7 +9,7 @@ public class SourcesConfiguration : BaseEntityTypeConfiguration<Sources>
 {
     public override void Configure(EntityTypeBuilder<Sources> builder)
     {
-        builder.ToTable(nameof(Sources).ToLower());
+     
         
         builder.HasIndex(x => x.Identifier).IsUnique();
         
