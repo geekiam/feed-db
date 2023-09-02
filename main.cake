@@ -94,10 +94,10 @@ Task("Test")
         var summaryDirectory = Directory("./coverage/summary");
         var summarySettings = new ReportGeneratorSettings
         {
-           ArgumentCustomization = args => args.Append($"-reportTypes:Html;MarkdownSummaryGithub")
+           ArgumentCustomization = args => args.Append($"-reportTypes:MarkdownSummaryGithub")
         };
         ReportGenerator(glob, summaryDirectory, summarySettings);
-        BuildSystem.GitHubActions.Commands.UploadArtifact(summaryDirectory,  "bubababa");
+        //BuildSystem.GitHubActions.Commands.UploadArtifact(summaryDirectory,  "bubababa");
       
       }
 });
