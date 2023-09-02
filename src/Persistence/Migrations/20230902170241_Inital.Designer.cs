@@ -12,8 +12,8 @@ using Persistence;
 namespace Geekiam.Migrations
 {
     [DbContext(typeof(FeedsDbContext))]
-    [Migration("20230902154042_initial")]
-    partial class initial
+    [Migration("20230902170241_Inital")]
+    partial class Inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
