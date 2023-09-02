@@ -11,4 +11,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\Persistence\Persistence.csproj" />
     </ItemGroup>
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+    </ItemGroup>
 </Project>
