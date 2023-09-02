@@ -1,11 +1,11 @@
-name: main
+name: nuget-build-deploy
 on:
   push:
     branches:
-      - main
+      - release/**
   pull_request:
     branches:
-      - main
+      - release/**
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,13 +26,4 @@ jobs:
           dotnet new tool-manifest
           dotnet tool install Cake.Tool
           dotnet tool restore
-          dotnet cake main.cake
-      - name: Create check run with code coverage Markdown report
-        uses: LouisBrunner/checks-action@v1.6.2
-        if: always()
-        with:
-          token: ${{ github.token }}
-          name: Code Coverage Summary
-          conclusion: ${{ job.status }}
-          output: '{"summary":"Geekiam Feeds Database Code Coverage Summary"}'
-          output_text_description_file: coverage/summary/SummaryGithub.md
+          dotnet cake
