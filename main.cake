@@ -1,9 +1,12 @@
 #addin nuget:?package=Cake.Coverlet&version=3.0.4
 #tool dotnet:?package=dotnet-reportgenerator-globaltool&version=5.1.24
+#tool "dotnet:?package=GitVersion.Tool&version=5.10.3"
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+string version = String.Empty;
 const string TEST_COVERAGE_OUTPUT_DIR = "coverage";
+
 Task("Clean")
     .Does(() => {
  
@@ -33,20 +36,33 @@ Task("Restore")
        Information($"Restoring { project.ToString() }");
        DotNetRestore(project.ToString(), settings);
      });
-  
-
+});
+Task("Version")
+    .Does(() => {
+   var result = GitVersion(new GitVersionSettings {
+        UpdateAssemblyInfo = true
+    });
+    
+    version = result.NuGetVersionV2;
+    Information($"Version: { version }");
 });
 
 Task("Build")
-    .IsDependentOn("Restore")
+    .IsDependentOn("Version")
     .Does(() => {
      var buildSettings = new DotNetBuildSettings {
                         Configuration = configuration,
+                        MSBuildSettings = new DotNetMSBuildSettings()
+                                                      .WithProperty("Version", version)
+                                                      .WithProperty("AssemblyVersion", version)
+                                                      .WithProperty("FileVersion", version)
                        };
-     GetFiles("./**/**/*.csproj").ToList().ForEach(project => {
-         Information($"Building { project.ToString() }");
+     var projects = GetFiles("./**/*.csproj");
+     foreach(var project in projects )
+     {
+         Information($"Building {project.ToString()}");
          DotNetBuild(project.ToString(),buildSettings);
-     });
+     }
 });
 
 Task("Test")
@@ -102,12 +118,48 @@ Task("Test")
       }
 });
 
+Task("Pack")
+ .IsDependentOn("Test")
+ .Does(() => {
+ 
+   var settings = new DotNetPackSettings
+    {
+        Configuration = configuration,
+        OutputDirectory = "./.artifacts",
+        NoBuild = true,
+        NoRestore = true,
+        MSBuildSettings = new DotNetMSBuildSettings()
+                        .WithProperty("PackageVersion", version)
+                        .WithProperty("Version", version)
+    };
+    
+    DotNetPack("./Feeds.sln", settings);
+ });
+ 
+ Task("PublishGithub")
+  .IsDependentOn("Pack")
+  .Does(context => {
+  if (BuildSystem.GitHubActions.IsRunningOnGitHubActions)
+   {
+      foreach(var file in GetFiles("./.artifacts/*.nupkg"))
+      {
+        Information("Publishing {0}...", file.GetFilename().FullPath);
+        DotNetNuGetPush(file, new DotNetNuGetPushSettings {
+              ApiKey = EnvironmentVariable("GITHUB_TOKEN"),
+              Source = "https://nuget.pkg.github.com/geekiam/index.json"
+        });
+      } 
+   } 
+ }); 
+
+
 
 
 Task("Default")
        .IsDependentOn("Clean")
        .IsDependentOn("Restore")
        .IsDependentOn("Build")
-       .IsDependentOn("Test");
-
+       .IsDependentOn("Test")
+       .IsDependentOn("Pack")
+       .IsDependentOn("PublishGithub");
 RunTarget(target);
