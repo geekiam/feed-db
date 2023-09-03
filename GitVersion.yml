@@ -11,8 +11,7 @@ branches:
     tag: alpha
   release:
     increment: Minor
-    tag: beta
-    is-release-branch: false
+    is-release-branch: true
   hotfix:
     increment: Patch
     tag: beta
