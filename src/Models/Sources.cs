@@ -24,6 +24,8 @@ public sealed class Sources : BaseEntity, IValidatableObject
     public ICollection<Posts> Posts { get; set; } = null!;
     public ICollection<SourceCategory> Categories { get; set; } = null!;
 
+    public ICollection<Schedules> Schedules { get; set; } = null!;
+
     public override string ToString()
     {
         return $"{Protocol}://{Domain}{FeedUrl}";
