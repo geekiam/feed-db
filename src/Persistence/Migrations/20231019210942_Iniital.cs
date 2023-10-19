@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Geekiam.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Inital : Migration
+    public partial class Iniital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,7 +49,22 @@ namespace Geekiam.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_media_types", x => x.id);
                 });
-
+            
+            migrationBuilder.InsertData(  
+                table: "media_types",  
+                columns: new []{ "name", "description", "active" },  
+                values:  new object[,]  
+                {  
+                    {"Image", "Primary image feed", true},  
+                    {"Video", "Video based feed", true },  
+                    {"Audio", "Audio based feed" , true },   
+                    {"Blog", "Blog based feed", true},  
+                    {"Article", "Article based feed", true},  
+                    {"News", "News based feed", true },  
+                    {"Podcast", "Podcast based feed", true},  
+                    {"Text", "Text based feed", true}  
+                }  
+            );
             migrationBuilder.CreateTable(
                 name: "status",
                 schema: "Feeds",
@@ -65,6 +80,18 @@ namespace Geekiam.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_status", x => x.id);
                 });
+            
+            migrationBuilder.InsertData(  
+                table: "status",  
+                columns: new []{ "name", "description", "active" },  
+                values: new object[,]  
+                {  
+                    {"Moderate", "Default status for new feeds", true},  
+                    {"Under Review", "Administrators are reviewing this feed", true},  
+                    {"Banned", "This feed has been banned", true},  
+                    {"Approved", "This feed has been approved", true}  
+                }  
+            );
 
             migrationBuilder.CreateTable(
                 name: "sources",
@@ -72,14 +99,14 @@ namespace Geekiam.Persistence.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    Identifier = table.Column<string>(type: "varchar", maxLength: 75, nullable: false),
-                    Name = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "varchar", maxLength: 300, nullable: false),
-                    Domain = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
-                    FeedUrl = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
-                    Protocol = table.Column<string>(type: "varchar", maxLength: 7, nullable: false),
-                    StatusId = table.Column<int>(type: "integer", nullable: false),
-                    MediaTypeId = table.Column<int>(type: "integer", nullable: false),
+                    identifier = table.Column<string>(type: "varchar", maxLength: 75, nullable: false),
+                    name = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
+                    description = table.Column<string>(type: "varchar", maxLength: 300, nullable: false),
+                    domain = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
+                    feed_url = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
+                    protocol = table.Column<string>(type: "varchar", maxLength: 7, nullable: false),
+                    status_id = table.Column<int>(type: "integer", nullable: false),
+                    media_type_id = table.Column<int>(type: "integer", nullable: false),
                     created = table.Column<DateTime>(type: "TimestampTz", nullable: false),
                     modified = table.Column<DateTime>(type: "TimestampTz", nullable: false),
                     active = table.Column<bool>(type: "boolean", nullable: true, defaultValue: true)
@@ -88,20 +115,34 @@ namespace Geekiam.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_sources", x => x.id);
                     table.ForeignKey(
-                        name: "FK_sources_media_types_MediaTypeId",
-                        column: x => x.MediaTypeId,
+                        name: "FK_sources_media_types_media_type_id",
+                        column: x => x.media_type_id,
                         principalSchema: "Feeds",
                         principalTable: "media_types",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_sources_status_StatusId",
-                        column: x => x.StatusId,
+                        name: "FK_sources_status_status_id",
+                        column: x => x.status_id,
                         principalSchema: "Feeds",
                         principalTable: "status",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
+            
+            migrationBuilder.InsertData(  
+                table: "sources",  
+                columns:  new []{ "identifier", "name", "description", "domain", "feed_url", "protocol", "status_id", "media_type_id", "created", "modified"  },  
+                values:new object[,]  
+                {  
+                    {"g_garywoodfine_0001", "Gary Woodfine", "Opinionated Software Developer", "garywoodfine.com",  "/feed", "https", 1, 4 , DateTime.UtcNow, DateTime.UtcNow } ,
+                    {"g_cryptonews_0001" , "Crypto News",   "Latest Cryptocurrency News, Bitcoin News, Ethereum News and Price Data",  "cryptonews.com", "news/feed",  "https", 1, 6, DateTime.UtcNow, DateTime.UtcNow },
+                    {"g_bitcoinmagazine_0001",  "Bitcoin Magazine",  "Bitcoin News, Articles and Expert Insights", "bitcoinmagazine.com", "/.rss/full/", "https", 1, 5, DateTime.UtcNow, DateTime.UtcNow },
+                    {"g_cointelegraph_0001", "Coin Telegraph", "Bitcoin, Ethereum, Crypto News & Price Indexes", "cointelegraph.com", "/rss", "https", 1, 6, DateTime.UtcNow, DateTime.UtcNow   },
+                    {"g_bitcoinist_0001",  "Bitcoinist", "Bitcoin news portal providing breaking news, guides, price and analysis about decentralized digital money and blockchain technology.", "bitcoinist.com", "/feed",  "https", 1,6 , DateTime.UtcNow, DateTime.UtcNow }
+                }  
+            );
+
 
             migrationBuilder.CreateTable(
                 name: "posts",
@@ -109,12 +150,12 @@ namespace Geekiam.Persistence.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    Title = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
-                    Summary = table.Column<string>(type: "varchar", maxLength: 150, nullable: false),
-                    Description = table.Column<string>(type: "varchar", maxLength: 300, nullable: false),
-                    Permalink = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
-                    Published = table.Column<DateTime>(type: "TimestampTz", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uuid", nullable: false),
+                    title = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
+                    summary = table.Column<string>(type: "varchar", maxLength: 150, nullable: false),
+                    description = table.Column<string>(type: "varchar", maxLength: 300, nullable: false),
+                    permalink = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
+                    published = table.Column<DateTime>(type: "TimestampTz", nullable: false),
+                    source_id = table.Column<Guid>(type: "uuid", nullable: false),
                     created = table.Column<DateTime>(type: "TimestampTz", nullable: false),
                     modified = table.Column<DateTime>(type: "TimestampTz", nullable: false),
                     active = table.Column<bool>(type: "boolean", nullable: true, defaultValue: true)
@@ -123,8 +164,8 @@ namespace Geekiam.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_posts", x => x.id);
                     table.ForeignKey(
-                        name: "FK_posts_sources_SourceId",
-                        column: x => x.SourceId,
+                        name: "FK_posts_sources_source_id",
+                        column: x => x.source_id,
                         principalSchema: "Feeds",
                         principalTable: "sources",
                         principalColumn: "id",
@@ -137,8 +178,8 @@ namespace Geekiam.Persistence.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    SourceId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
+                    source_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    category_id = table.Column<Guid>(type: "uuid", nullable: false),
                     created = table.Column<DateTime>(type: "TimestampTz", nullable: false),
                     modified = table.Column<DateTime>(type: "TimestampTz", nullable: false),
                     active = table.Column<bool>(type: "boolean", nullable: true, defaultValue: true)
@@ -147,15 +188,15 @@ namespace Geekiam.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_source_category", x => x.id);
                     table.ForeignKey(
-                        name: "FK_source_category_categories_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_source_category_categories_category_id",
+                        column: x => x.category_id,
                         principalSchema: "Feeds",
                         principalTable: "categories",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_source_category_sources_SourceId",
-                        column: x => x.SourceId,
+                        name: "FK_source_category_sources_source_id",
+                        column: x => x.source_id,
                         principalSchema: "Feeds",
                         principalTable: "sources",
                         principalColumn: "id",
@@ -170,56 +211,56 @@ namespace Geekiam.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_posts_Permalink_SourceId",
+                name: "IX_posts_permalink_source_id",
                 schema: "Feeds",
                 table: "posts",
-                columns: new[] { "Permalink", "SourceId" },
+                columns: new[] { "permalink", "source_id" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_posts_SourceId",
+                name: "IX_posts_source_id",
                 schema: "Feeds",
                 table: "posts",
-                column: "SourceId");
+                column: "source_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_source_category_CategoryId_SourceId",
+                name: "IX_source_category_category_id_source_id",
                 schema: "Feeds",
                 table: "source_category",
-                columns: new[] { "CategoryId", "SourceId" },
+                columns: new[] { "category_id", "source_id" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_source_category_SourceId",
+                name: "IX_source_category_source_id",
                 schema: "Feeds",
                 table: "source_category",
-                column: "SourceId");
+                column: "source_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_sources_FeedUrl_Domain",
+                name: "IX_sources_feed_url_domain",
                 schema: "Feeds",
                 table: "sources",
-                columns: new[] { "FeedUrl", "Domain" },
+                columns: new[] { "feed_url", "domain" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_sources_Identifier",
+                name: "IX_sources_identifier",
                 schema: "Feeds",
                 table: "sources",
-                column: "Identifier",
+                column: "identifier",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_sources_MediaTypeId",
+                name: "IX_sources_media_type_id",
                 schema: "Feeds",
                 table: "sources",
-                column: "MediaTypeId");
+                column: "media_type_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_sources_StatusId",
+                name: "IX_sources_status_id",
                 schema: "Feeds",
                 table: "sources",
-                column: "StatusId");
+                column: "status_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_status_name",

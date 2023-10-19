@@ -18,5 +18,5 @@ using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>(
 {
     var context = serviceScope.ServiceProvider.GetService<FeedsDbContext>();
     context?.Database.Migrate();
-    if (context != null) DbInitialiser.Initialise(context);
+    
 }

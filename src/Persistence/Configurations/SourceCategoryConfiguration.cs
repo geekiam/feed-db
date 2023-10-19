@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Models;
+using Threenine;
 using Threenine.Configurations.PostgreSql;
 using Threenine.Database.Configuration.PostgreSql;
 
@@ -15,10 +16,12 @@ public class SourceCategoryConfiguration : BaseEntityTypeConfiguration<SourceCat
         builder.HasIndex(x => new {x.CategoryId, x.SourceId}).IsUnique();
         
         builder.Property(x => x.CategoryId)
+            .HasColumnName(nameof(SourceCategory.CategoryId).ToSnakeCase())
             .HasColumnType(ColumnTypes.UniqueIdentifier)
             .IsRequired();
 
         builder.Property(x => x.SourceId)
+            .HasColumnName(nameof(SourceCategory.SourceId).ToSnakeCase())
             .HasColumnType(ColumnTypes.UniqueIdentifier)
             .IsRequired();
 

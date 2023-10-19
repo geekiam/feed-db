@@ -114,7 +114,8 @@ namespace Geekiam.Persistence.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(300)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("description");
 
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnUpdate()
@@ -124,23 +125,28 @@ namespace Geekiam.Persistence.Migrations
                     b.Property<string>("Permalink")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("permalink");
 
                     b.Property<DateTime>("Published")
-                        .HasColumnType("TimestampTz");
+                        .HasColumnType("TimestampTz")
+                        .HasColumnName("published");
 
                     b.Property<Guid>("SourceId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("source_id");
 
                     b.Property<string>("Summary")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("summary");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("title");
 
                     b.HasKey("Id");
 
@@ -167,7 +173,8 @@ namespace Geekiam.Persistence.Migrations
                         .HasColumnName("active");
 
                     b.Property<Guid>("CategoryId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("category_id");
 
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
@@ -180,7 +187,8 @@ namespace Geekiam.Persistence.Migrations
                         .HasColumnName("modified");
 
                     b.Property<Guid>("SourceId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("source_id");
 
                     b.HasKey("Id");
 
@@ -214,25 +222,30 @@ namespace Geekiam.Persistence.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(300)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("description");
 
                     b.Property<string>("Domain")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("domain");
 
                     b.Property<string>("FeedUrl")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("feed_url");
 
                     b.Property<string>("Identifier")
                         .IsRequired()
                         .HasMaxLength(75)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("identifier");
 
                     b.Property<int>("MediaTypeId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("media_type_id");
 
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnUpdate()
@@ -242,15 +255,18 @@ namespace Geekiam.Persistence.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("name");
 
                     b.Property<string>("Protocol")
                         .IsRequired()
                         .HasMaxLength(7)
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar")
+                        .HasColumnName("protocol");
 
                     b.Property<int>("StatusId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("status_id");
 
                     b.HasKey("Id");
 
