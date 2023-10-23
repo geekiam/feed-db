@@ -15,7 +15,7 @@ public class SourcesConfiguration : BaseEntityTypeConfiguration<Sources>
         
         builder.HasIndex(x => x.Identifier).IsUnique();
         
-        builder.HasIndex(x => new { x.FeedUrl, x.Domain})
+        builder.HasIndex(x => new { x.Domain})
             .IsUnique();
         
         builder.Property(x => x.Identifier)
@@ -41,11 +41,7 @@ public class SourcesConfiguration : BaseEntityTypeConfiguration<Sources>
             .HasMaxLength(255)
             .IsRequired();
         
-        builder.Property(x => x.FeedUrl)
-            .HasColumnName(nameof(Sources.FeedUrl).ToSnakeCase())
-            .HasColumnType(ColumnTypes.Varchar)
-            .HasMaxLength(255)
-            .IsRequired();
+       
         
         builder.Property(x => x.Protocol)
             .HasColumnName(nameof(Sources.Protocol).ToLower())
@@ -58,9 +54,7 @@ public class SourcesConfiguration : BaseEntityTypeConfiguration<Sources>
             .HasColumnName(nameof(Sources.StatusId).ToSnakeCase())
             .HasColumnType(ColumnTypes.Integer);
         
-        builder.Property(x => x.MediaTypeId)
-            .HasColumnName(nameof(Sources.MediaTypeId).ToSnakeCase())
-            .HasColumnType(ColumnTypes.Integer);
+     
 
        
 
@@ -69,10 +63,7 @@ public class SourcesConfiguration : BaseEntityTypeConfiguration<Sources>
             .HasForeignKey(x => x.StatusId)
             .IsRequired();
        
-       builder.HasOne(x => x.MediaType)
-           .WithMany(x => x.Sources)
-           .HasForeignKey(x => x.MediaTypeId)
-           .IsRequired();
+     
        
 
       

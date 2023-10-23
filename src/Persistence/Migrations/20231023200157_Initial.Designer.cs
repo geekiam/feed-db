@@ -12,15 +12,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Geekiam.Persistence.Migrations
 {
     [DbContext(typeof(FeedsDbContext))]
-    [Migration("20231019210942_Iniital")]
-    partial class Iniital
+    [Migration("20231023200157_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Feeds")
+                .HasDefaultSchema("geekiam_feeds")
                 .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -58,7 +58,60 @@ namespace Geekiam.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("categories", "Feeds");
+                    b.ToTable("categories", "geekiam_feeds");
+                });
+
+            modelBuilder.Entity("Models.Feeds", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<bool?>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("active");
+
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TimestampTz")
+                        .HasColumnName("created");
+
+                    b.Property<int>("MediaTypeId")
+                        .HasColumnType("integer")
+                        .HasColumnName("media_type_id");
+
+                    b.Property<DateTime>("Modified")
+                        .ValueGeneratedOnUpdate()
+                        .HasColumnType("TimestampTz")
+                        .HasColumnName("modified");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar")
+                        .HasColumnName("path");
+
+                    b.Property<Guid>("SourcesId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sources_id");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer")
+                        .HasColumnName("status_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MediaTypeId");
+
+                    b.HasIndex("SourcesId");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("feeds", "geekiam_feeds");
                 });
 
             modelBuilder.Entity("Models.MediaTypes", b =>
@@ -92,7 +145,7 @@ namespace Geekiam.Persistence.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("media_types", "Feeds");
+                    b.ToTable("media_types", "geekiam_feeds");
                 });
 
             modelBuilder.Entity("Models.Posts", b =>
@@ -120,6 +173,10 @@ namespace Geekiam.Persistence.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("description");
 
+                    b.Property<Guid>("FeedId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("feed_id");
+
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnUpdate()
                         .HasColumnType("TimestampTz")
@@ -135,10 +192,6 @@ namespace Geekiam.Persistence.Migrations
                         .HasColumnType("TimestampTz")
                         .HasColumnName("published");
 
-                    b.Property<Guid>("SourceId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("source_id");
-
                     b.Property<string>("Summary")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -153,12 +206,88 @@ namespace Geekiam.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SourceId");
+                    b.HasIndex("FeedId");
 
-                    b.HasIndex("Permalink", "SourceId")
+                    b.HasIndex("Permalink")
                         .IsUnique();
 
-                    b.ToTable("posts", "Feeds");
+                    b.ToTable("posts", "geekiam_feeds");
+                });
+
+            modelBuilder.Entity("Models.ScheduleTypes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("active");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(75)
+                        .HasColumnType("varchar")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("schedule_types", "geekiam_feeds");
+                });
+
+            modelBuilder.Entity("Models.Schedules", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<bool?>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("active");
+
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TimestampTz")
+                        .HasColumnName("created");
+
+                    b.Property<Guid>("FeedId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("feed_id");
+
+                    b.Property<DateTime>("Modified")
+                        .ValueGeneratedOnUpdate()
+                        .HasColumnType("TimestampTz")
+                        .HasColumnName("modified");
+
+                    b.Property<int>("ScheduleTypeId")
+                        .HasColumnType("integer")
+                        .HasColumnName("schedule_type_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FeedId");
+
+                    b.HasIndex("ScheduleTypeId", "FeedId")
+                        .IsUnique();
+
+                    b.ToTable("schedules", "geekiam_feeds");
                 });
 
             modelBuilder.Entity("Models.SourceCategory", b =>
@@ -200,7 +329,7 @@ namespace Geekiam.Persistence.Migrations
                     b.HasIndex("CategoryId", "SourceId")
                         .IsUnique();
 
-                    b.ToTable("source_category", "Feeds");
+                    b.ToTable("source_category", "geekiam_feeds");
                 });
 
             modelBuilder.Entity("Models.Sources", b =>
@@ -234,21 +363,11 @@ namespace Geekiam.Persistence.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("domain");
 
-                    b.Property<string>("FeedUrl")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar")
-                        .HasColumnName("feed_url");
-
                     b.Property<string>("Identifier")
                         .IsRequired()
                         .HasMaxLength(75)
                         .HasColumnType("varchar")
                         .HasColumnName("identifier");
-
-                    b.Property<int>("MediaTypeId")
-                        .HasColumnType("integer")
-                        .HasColumnName("media_type_id");
 
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnUpdate()
@@ -273,17 +392,15 @@ namespace Geekiam.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Domain")
+                        .IsUnique();
+
                     b.HasIndex("Identifier")
                         .IsUnique();
 
-                    b.HasIndex("MediaTypeId");
-
                     b.HasIndex("StatusId");
 
-                    b.HasIndex("FeedUrl", "Domain")
-                        .IsUnique();
-
-                    b.ToTable("sources", "Feeds");
+                    b.ToTable("sources", "geekiam_feeds");
                 });
 
             modelBuilder.Entity("Models.Status", b =>
@@ -317,18 +434,64 @@ namespace Geekiam.Persistence.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("status", "Feeds");
+                    b.ToTable("status", "geekiam_feeds");
+                });
+
+            modelBuilder.Entity("Models.Feeds", b =>
+                {
+                    b.HasOne("Models.MediaTypes", "MediaType")
+                        .WithMany("Feeds")
+                        .HasForeignKey("MediaTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Sources", "Source")
+                        .WithMany()
+                        .HasForeignKey("SourcesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Status", "Status")
+                        .WithMany("Feeds")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MediaType");
+
+                    b.Navigation("Source");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Models.Posts", b =>
                 {
-                    b.HasOne("Models.Sources", "Source")
+                    b.HasOne("Models.Feeds", "Feed")
                         .WithMany("Posts")
-                        .HasForeignKey("SourceId")
+                        .HasForeignKey("FeedId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Source");
+                    b.Navigation("Feed");
+                });
+
+            modelBuilder.Entity("Models.Schedules", b =>
+                {
+                    b.HasOne("Models.Feeds", "Feed")
+                        .WithMany("Schedules")
+                        .HasForeignKey("FeedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.ScheduleTypes", "ScheduleType")
+                        .WithMany("Schedules")
+                        .HasForeignKey("ScheduleTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Feed");
+
+                    b.Navigation("ScheduleType");
                 });
 
             modelBuilder.Entity("Models.SourceCategory", b =>
@@ -352,19 +515,11 @@ namespace Geekiam.Persistence.Migrations
 
             modelBuilder.Entity("Models.Sources", b =>
                 {
-                    b.HasOne("Models.MediaTypes", "MediaType")
-                        .WithMany("Sources")
-                        .HasForeignKey("MediaTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Models.Status", "Status")
                         .WithMany("Sources")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("MediaType");
 
                     b.Navigation("Status");
                 });
@@ -374,20 +529,32 @@ namespace Geekiam.Persistence.Migrations
                     b.Navigation("Sources");
                 });
 
+            modelBuilder.Entity("Models.Feeds", b =>
+                {
+                    b.Navigation("Posts");
+
+                    b.Navigation("Schedules");
+                });
+
             modelBuilder.Entity("Models.MediaTypes", b =>
                 {
-                    b.Navigation("Sources");
+                    b.Navigation("Feeds");
+                });
+
+            modelBuilder.Entity("Models.ScheduleTypes", b =>
+                {
+                    b.Navigation("Schedules");
                 });
 
             modelBuilder.Entity("Models.Sources", b =>
                 {
                     b.Navigation("Categories");
-
-                    b.Navigation("Posts");
                 });
 
             modelBuilder.Entity("Models.Status", b =>
                 {
+                    b.Navigation("Feeds");
+
                     b.Navigation("Sources");
                 });
 #pragma warning restore 612, 618

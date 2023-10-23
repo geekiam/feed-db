@@ -5,7 +5,7 @@ namespace Models;
 
 public sealed class MediaTypes : ValueListEntity, IValidatableObject
 {
-    public ICollection<Sources> Sources { get; set; } = null!;
+    public ICollection<Feeds> Feeds { get; set; } = null!;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {

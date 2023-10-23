@@ -11,9 +11,9 @@ public sealed class Posts: BaseEntity, IValidatableObject
     public string Permalink { get; set; } = null!;
     public DateTime Published { get; set; }
     
-    public Sources Source { get; set; } = null!;
+    public Feeds Feed { get; set; } = null!;
     
-    public Guid SourceId { get; set; }
+    public Guid FeedId { get; set; }
     
     
     

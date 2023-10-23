@@ -29,7 +29,6 @@ public class SourcesTestData : IEnumerable<object[]>
             Builder<Sources>.CreateNew()
                 .With(x => x.Domain = "test.com")
                 .With(x => x.Name = string.Empty)
-                .With(x => x.FeedUrl = "/test1")
                 .Build(),
             1, "Name should not be empty"
         };
@@ -39,29 +38,28 @@ public class SourcesTestData : IEnumerable<object[]>
                 .With(x => x.Domain = "test.com")
                 .With(x => x.Name = "test.com")
                 .Build(),
-            2, "Domain is the same as Name and name is an absolute URL"
+            1, "Domain is the same as Name and name is an absolute URL"
         };
         
         yield return new object[]
         {
             Builder<Sources>.CreateNew()
-                .With(x => x.Domain = "test.com")
+                .With(x => x.Domain = "/test.com")
                 .With(x => x.Name = "test")
                 .Build(),
             1, "Domain is not an absolute URL"
         };
         
-        yield return new object[]
+        /*yield return new object[]
         {
             Builder<Sources>.CreateNew()
                 .With(x => x.Domain = "test.com")
                 .With(x => x.Name = "test")
-                .With(x => x.FeedUrl = "test.com")
-                .Build(),
+              .Build(),
             2, "Domain is the same as FeedLink"
-        };
+        };*/
         
-        yield return new object[]
+        /*yield return new object[]
         {
             Builder<Sources>.CreateNew()
                 .With(x => x.Domain = "test.com")
@@ -69,7 +67,7 @@ public class SourcesTestData : IEnumerable<object[]>
                 .With(x => x.FeedUrl = "https://test1.com")
                 .Build(),
             1, "FeedLink should be relative"
-        };
+        };*/
         
      
         

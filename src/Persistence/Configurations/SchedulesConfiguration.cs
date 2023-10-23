@@ -11,9 +11,10 @@ public class SchedulesConfiguration : Threenine.Database.Configuration.PostgreSq
 {
     public override void Configure(EntityTypeBuilder<Schedules> builder)
     {
-        builder.HasIndex(x => new { x.ScheduleTypeId, x.SourceId }).IsUnique();
-        builder.Property(x => x.SourceId)
-            .HasColumnName(nameof(Schedules.SourceId).ToSnakeCase())
+        builder.HasIndex(x => new { x.ScheduleTypeId, x.FeedId }).IsUnique();
+       
+        builder.Property(x => x.FeedId)
+            .HasColumnName(nameof(Schedules.FeedId).ToSnakeCase())
             .HasColumnType(ColumnTypes.UniqueIdentifier)
             .IsRequired();
         
@@ -22,13 +23,14 @@ public class SchedulesConfiguration : Threenine.Database.Configuration.PostgreSq
             .HasColumnType(ColumnTypes.Integer)
             .IsRequired();
         
-        builder.HasOne(x => x.ScheduleTypes)
+        builder.HasOne(x => x.ScheduleType)
             .WithMany(x => x.Schedules)
             .HasForeignKey(x => x.ScheduleTypeId);
-        
-        builder.HasOne(x => x.Source)
+
+        builder.HasOne(x => x.Feed)
             .WithMany(x => x.Schedules)
-            .HasForeignKey(x => x.SourceId);
+            .HasForeignKey(x => x.FeedId);
+    
         
         base.Configure(builder);
     }

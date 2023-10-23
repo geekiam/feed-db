@@ -36,20 +36,22 @@ public class PostsConfiguration : BaseEntityTypeConfiguration<Posts>
             .HasColumnType(ColumnTypes.Varchar)
             .HasMaxLength(150);
 
-        builder.HasIndex(x => new { x.Permalink, x.SourceId }).IsUnique();
+        builder.HasIndex(x => new { x.Permalink }).IsUnique();
       
         builder.Property(x => x.Published)
             .HasColumnName(nameof(Posts.Published).ToLower())
             .HasColumnType(ColumnTypes.Timestamp)
             .IsRequired();
 
-        builder.Property(x => x.SourceId)
-            .HasColumnName(nameof(Posts.SourceId).ToSnakeCase())
-            .HasColumnType(ColumnTypes.UniqueIdentifier);
-    
-        builder.HasOne(x => x.Source)
+        builder.Property(x => x.FeedId)
+            .HasColumnName(nameof(Posts.FeedId).ToSnakeCase())
+            .HasColumnType(ColumnTypes.UniqueIdentifier)
+            .IsRequired();
+
+        builder.HasOne(x => x.Feed)
             .WithMany(x => x.Posts)
-            .HasForeignKey(x => x.SourceId);
+            .HasForeignKey(x => x.FeedId);
+       
       
         base.Configure(builder);
     }
