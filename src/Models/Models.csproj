@@ -1,4 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
 <ItemGroup>
   <EmbeddedResource Update="Resources.resx">
     <Generator>ResXFileCodeGenerator</Generator>

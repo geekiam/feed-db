@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 <PropertyGroup>
-  <AssemblyName>Configuration</AssemblyName>
+  <AssemblyName>Persistence</AssemblyName>
   <RootNamespace>Geekiam.Persistence</RootNamespace>
 </PropertyGroup>
 <ItemGroup>
