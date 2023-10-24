@@ -22,6 +22,7 @@ jobs:
         shell : bash
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           dotnet new tool-manifest
           dotnet tool install Cake.Tool
