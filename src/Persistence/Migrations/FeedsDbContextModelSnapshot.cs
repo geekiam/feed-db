@@ -443,7 +443,7 @@ namespace Geekiam.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Models.Sources", "Source")
-                        .WithMany()
+                        .WithMany("Feeds")
                         .HasForeignKey("SourcesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -546,6 +546,8 @@ namespace Geekiam.Persistence.Migrations
             modelBuilder.Entity("Models.Sources", b =>
                 {
                     b.Navigation("Categories");
+
+                    b.Navigation("Feeds");
                 });
 
             modelBuilder.Entity("Models.Status", b =>

@@ -19,7 +19,7 @@ public sealed class Sources : BaseEntity, IValidatableObject
     public int StatusId { get; set; }
     public Status Status { get; set; } = null!;
     
-
+    public ICollection<Feeds> Feeds { get; set; }
   
     public ICollection<SourceCategory> Categories { get; set; } = null!;
 

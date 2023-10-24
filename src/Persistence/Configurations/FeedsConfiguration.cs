@@ -30,7 +30,9 @@ public class FeedsConfiguration  : BaseEntityTypeConfiguration<Feeds>
             .HasColumnName(nameof(Feeds.MediaTypeId).ToSnakeCase())
             .HasColumnType(ColumnTypes.Integer);
 
-       
+        builder.HasOne(x => x.Source)
+            .WithMany(x => x.Feeds)
+            .HasForeignKey(x => x.SourcesId);
 
         builder.HasOne(x => x.MediaType)
             .WithMany(x => x.Feeds)
@@ -40,7 +42,6 @@ public class FeedsConfiguration  : BaseEntityTypeConfiguration<Feeds>
             .WithMany(x => x.Feeds)
             .HasForeignKey(x => x.StatusId)
             .IsRequired();
-
    
         
         base.Configure(builder);
