@@ -57,7 +57,7 @@ Task("Build")
                                                       .WithProperty("AssemblyVersion", version)
                                                       .WithProperty("FileVersion", version)
                        };
-     var projects = GetFiles("./src/**/*.csproj");
+     var projects = GetFiles("./**/**/*.csproj");
      foreach(var project in projects )
      {
          Information($"Building {project.ToString()}");
