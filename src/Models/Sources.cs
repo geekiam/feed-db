@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using Geekiam.Persistence.Models;
 using Threenine.Models;
 
 namespace Models;

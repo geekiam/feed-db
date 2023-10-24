@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Models {
+namespace Geekiam.Persistence.Models {
     using System;
     
     
@@ -28,7 +28,7 @@ namespace Models {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Geekiam.Resources", typeof(Resources).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Geekiam.Persistence.Models.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

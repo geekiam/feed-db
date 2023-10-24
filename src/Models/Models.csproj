@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <IsPackable>false</IsPackable>
+    <IsPackable>True</IsPackable>
+    <AssemblyName>Geekiam.Persistence.Models</AssemblyName>
+    <RootNamespace>Geekiam.Persistence.Models</RootNamespace>
   </PropertyGroup>
 <ItemGroup>
   <EmbeddedResource Update="Resources.resx">

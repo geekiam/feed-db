@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Geekiam.Persistence.Models;
 using Threenine.Models;
 
 namespace Models;
