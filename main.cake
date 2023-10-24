@@ -57,7 +57,7 @@ Task("Build")
                                                       .WithProperty("AssemblyVersion", version)
                                                       .WithProperty("FileVersion", version)
                        };
-     var projects = GetFiles("./**/Persistence.csproj");
+     var projects = GetFiles("./src/**/*.csproj");
      foreach(var project in projects )
      {
          Information($"Building {project.ToString()}");
@@ -147,7 +147,7 @@ Task("Pack")
         DotNetNuGetPush(file, new DotNetNuGetPushSettings {
               ApiKey = EnvironmentVariable("GITHUB_TOKEN"),
               Source = "https://nuget.pkg.github.com/geekiam/index.json",
-              SkipDuplicate =true
+              SkipDuplicate = true
         });
       } 
    } 
@@ -163,7 +163,7 @@ Task("PublishNuget")
        DotNetNuGetPush(file, new DotNetNuGetPushSettings {
           ApiKey = context.EnvironmentVariable("NUGET_API_KEY"),
           Source = "https://api.nuget.org/v3/index.json",
-          SkipDuplicate =true
+          SkipDuplicate = true
        });
      }
    }
