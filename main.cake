@@ -133,7 +133,7 @@ Task("Pack")
                         .WithProperty("Version", version)
     };
     
-    DotNetPack("./Feeds.sln", settings);
+    DotNetPack("./src/Persistence/Persistence.csproj", settings);
  });
  
  Task("PublishGithub")
