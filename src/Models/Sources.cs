@@ -16,7 +16,7 @@ public sealed class Sources : BaseEntity, IValidatableObject
 
     public string Protocol { get; set; } = null!;
 
-    public int StatusId { get; set; }
+    public int StatusId { get; set; } = 1;
     public Status Status { get; set; } = null!;
     
     public ICollection<Feeds> Feeds { get; set; }

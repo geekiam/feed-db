@@ -24,7 +24,7 @@ namespace Geekiam.Persistence.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    Name = table.Column<string>(type: "varchar", maxLength: 65, nullable: false),
+                    name = table.Column<string>(type: "varchar", maxLength: 65, nullable: false),
                     created = table.Column<DateTime>(type: "TimestampTz", nullable: false),
                     modified = table.Column<DateTime>(type: "TimestampTz", nullable: false),
                     active = table.Column<bool>(type: "boolean", nullable: true, defaultValue: true)

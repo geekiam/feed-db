@@ -12,8 +12,8 @@ public sealed class Feeds : BaseEntity, IValidatableObject
     public Sources Source { get; set; }
     public int MediaTypeId { get; set; }
     public MediaTypes MediaType { get; set; } = null!;
-    
-    public int StatusId { get; set; }
+
+    public int StatusId { get; set; } = 1;
     public Status Status { get; set; }
     
  
