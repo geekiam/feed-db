@@ -21,7 +21,7 @@ public sealed class Feeds : BaseEntity, IValidatableObject
 
 
     
-    public ICollection<Posts> Posts { get; set; } = null!;
+    public  ICollection<Posts> Posts { get; set; } = null!;
     public ICollection<Schedules> Schedules { get; set; } = null!;
     
 

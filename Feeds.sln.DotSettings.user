@@ -7,6 +7,6 @@
   &lt;Project Location="/home/gary/Documents/geekiam/feed-db/tests/Unit" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;Unit&amp;gt;" /&gt;
 &lt;/SessionState&gt;</s:String>
 	
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FModels_002FResources/@EntryIndexedValue">True</s:Boolean>
+	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>
 	</wpf:ResourceDictionary>

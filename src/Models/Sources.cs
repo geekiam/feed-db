@@ -41,16 +41,9 @@ public sealed class Sources : BaseEntity, IValidatableObject
         if (Name.Equals(Domain, StringComparison.InvariantCulture))
            yield return new ValidationResult(Resources.NameCannotBeDomain);
         
-
-       
-        
         if (!Regex.Match(Domain,RegularExpressions.DomainName, RegexOptions.IgnoreCase).Success)
         {
             yield return new ValidationResult(Resources.InvalidDomainName);
         }
-        
-        
     }
-
-    
 }

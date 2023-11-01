@@ -24,7 +24,8 @@ public class FeedsConfiguration  : BaseEntityTypeConfiguration<Feeds>
         
         builder.Property(x => x.StatusId)
             .HasColumnName(nameof(Feeds.StatusId).ToSnakeCase())
-            .HasColumnType(ColumnTypes.Integer);
+            .HasColumnType(ColumnTypes.Integer)
+            .HasDefaultValue(1);
         
         builder.Property(x => x.MediaTypeId)
             .HasColumnName(nameof(Feeds.MediaTypeId).ToSnakeCase())

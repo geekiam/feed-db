@@ -52,7 +52,8 @@ public class SourcesConfiguration : BaseEntityTypeConfiguration<Sources>
 
         builder.Property(x => x.StatusId)
             .HasColumnName(nameof(Sources.StatusId).ToSnakeCase())
-            .HasColumnType(ColumnTypes.Integer);
+            .HasColumnType(ColumnTypes.Integer)
+            .HasDefaultValue(1);
         
      
 

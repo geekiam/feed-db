@@ -55,14 +55,9 @@ namespace Geekiam.Persistence.Migrations
                 columns: new []{ "name", "description", "active" },  
                 values:  new object[,]  
                 {  
-                    {"Image", "Primary image feed", true},  
-                    {"Video", "Video based feed", true },  
-                    {"Audio", "Audio based feed" , true },   
-                    {"Blog", "Blog based feed", true},  
-                    {"Article", "Article based feed", true},  
-                    {"News", "News based feed", true },  
-                    {"Podcast", "Podcast based feed", true},  
-                    {"Text", "Text based feed", true}  
+                    {"application/rss+xml", "RSS XML Feed", true},  
+                    {"application/atom+xml", "atom+xml", true },  
+                    {"application/feed+json", "feed+json" , true }
                 }  
             );
 
