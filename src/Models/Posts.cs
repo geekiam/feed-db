@@ -15,7 +15,10 @@ public sealed class Posts: BaseEntity, IValidatableObject
     public Feeds Feed { get; set; } = null!;
     
     public Guid FeedId { get; set; }
-    
+
+    public Twitter Twitter { get; set; } = null!;
+
+    public OpenGraph OpenGraph { get; set; } = null!;
     
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

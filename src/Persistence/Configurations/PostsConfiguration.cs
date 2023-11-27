@@ -1,3 +1,4 @@
+using Geekiam.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Models;
@@ -51,7 +52,10 @@ public class PostsConfiguration : BaseEntityTypeConfiguration<Posts>
         builder.HasOne(x => x.Feed)
             .WithMany(x => x.Posts)
             .HasForeignKey(x => x.FeedId);
-       
+
+        builder.HasOne(x => x.Twitter)
+            .WithOne(x => x.Post)
+            .HasForeignKey<Twitter>(k => k.PostId);
       
         base.Configure(builder);
     }
