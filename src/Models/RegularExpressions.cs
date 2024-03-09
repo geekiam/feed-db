@@ -1,6 +1,4 @@
-using System.Text.RegularExpressions;
-
-namespace Models;
+namespace Geekiam.Persistence.Models;
 
 internal static class RegularExpressions
 {

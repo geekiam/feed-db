@@ -1,14 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
+﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Threenine;
 using Threenine.Configurations.PostgreSql;
 
 namespace Geekiam.Persistence;
-[ExcludeFromCodeCoverage]
-public class FeedsDbContext : BaseContext<FeedsDbContext>
+
+public class FeedsContext : DbContext
 {
-    public FeedsDbContext(DbContextOptions<FeedsDbContext> options) : base(options)
+    public FeedsContext(DbContextOptions<FeedsContext> options) : base(options)
     {
     }
 
@@ -19,5 +17,14 @@ public class FeedsDbContext : BaseContext<FeedsDbContext>
         modelBuilder.HasPostgresExtension(PostgreExtensions.UUIDGenerator);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
+    }
+    public async Task MigrateAsync()
+    {
+        await Database.MigrateAsync();
+    }
+
+    public void Migrate()
+    {
+        Database.Migrate();
     }
 }

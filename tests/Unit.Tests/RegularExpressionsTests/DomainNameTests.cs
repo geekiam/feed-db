@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Text.RegularExpressions;
-using Models;
+using Geekiam.Persistence.Models;
 using Shouldly;
 
-namespace Geekiam.RegularExpressionsTests;
+namespace Geekiam.Persistence.Unit.Tests.RegularExpressionsTests;
 
 public class DomainNameTests
 {

@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Geekiam.Persistence;
 [ExcludeFromCodeCoverage]
-internal class FeedsContextFactory : IDesignTimeDbContextFactory<FeedsDbContext>
+internal class FeedsContextFactory : IDesignTimeDbContextFactory<FeedsContext>
 {
-    public FeedsDbContext CreateDbContext(string[] args)
+    public FeedsContext CreateDbContext(string[] args)
     {
-        DbContextOptionsBuilder<FeedsDbContext> dbContextOptionsBuilder =
+        DbContextOptionsBuilder<FeedsContext> dbContextOptionsBuilder =
             new();
         
         dbContextOptionsBuilder.UseNpgsql(ConnectionStringNames.LocalBuild);
-        return new FeedsDbContext(dbContextOptionsBuilder.Options);
+        return new FeedsContext(dbContextOptionsBuilder.Options);
     }
 }
