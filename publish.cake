@@ -6,7 +6,7 @@ Task("Github")
   .Does(context => {
   if (BuildSystem.GitHubActions.IsRunningOnGitHubActions)
    {
-      foreach(var file in GetFiles("./artifacts/*.nupkg"))
+      foreach(var file in GetFiles("./artifacts/nuget-packages/*.nupkg"))
       {
         Information("Publishing {0}...", file.GetFilename().FullPath);
         DotNetNuGetPush(file, new DotNetNuGetPushSettings {
@@ -22,7 +22,7 @@ Task("Nuget")
  .Does(context => {
    if (BuildSystem.GitHubActions.IsRunningOnGitHubActions)
    {
-     foreach(var file in GetFiles("./artifacts/*.nupkg"))
+     foreach(var file in GetFiles("./artifacts/nuget-packages/*.nupkg"))
      {
        Information("Publishing {0}...", file.GetFilename().FullPath);
        DotNetNuGetPush(file, new DotNetNuGetPushSettings {
