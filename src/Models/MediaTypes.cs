@@ -10,7 +10,7 @@ public sealed class MediaTypes : ValueListEntity, IValidatableObject
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        if(string.IsNullOrEmpty(Name))
+        if (string.IsNullOrEmpty(Name))
             yield return new ValidationResult(Resources.NameRequired);
     }
 }

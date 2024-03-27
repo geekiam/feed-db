@@ -3,7 +3,6 @@ using Threenine.Configurations.PostgreSql;
 
 namespace Geekiam.Persistence.Configurations;
 
-public class StatusConfiguration : ValueListTypeConfiguration<Status> 
+internal class StatusConfiguration : ValueListTypeConfiguration<Status>
 {
-    
 }

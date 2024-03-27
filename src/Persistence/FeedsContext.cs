@@ -4,13 +4,8 @@ using Threenine.Configurations.PostgreSql;
 
 namespace Geekiam.Persistence;
 
-public class FeedsContext : DbContext
+public class FeedsContext(DbContextOptions<FeedsContext> options) : DbContext(options)
 {
-    public FeedsContext(DbContextOptions<FeedsContext> options) : base(options)
-    {
-    }
-
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema(DefaultSchema.Name);
@@ -18,6 +13,7 @@ public class FeedsContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }
+
     public async Task MigrateAsync()
     {
         await Database.MigrateAsync();

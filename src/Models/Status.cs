@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Geekiam.Persistence.Models;
 using Threenine.Models;
@@ -13,7 +12,7 @@ public sealed class Status : ValueListEntity, IValidatableObject
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        if(string.IsNullOrEmpty(Name))
+        if (string.IsNullOrEmpty(Name))
             yield return new ValidationResult(Resources.NameRequired);
     }
 }

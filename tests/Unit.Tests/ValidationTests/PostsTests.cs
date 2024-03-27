@@ -25,29 +25,28 @@ public class PostsTestData : IEnumerable<object[]>
     public IEnumerator<object[]> GetEnumerator()
     {
         // Test Title is required
-        yield return new object[]
-        {
+        yield return
+        [
             Builder<Posts>.CreateNew()
                 .With(x => x.Title = string.Empty)
                 .With(x => x.Permalink = "https://test.com")
                 .Build(),
             1, "Posts should have a title"
-        };
-        
+        ];
+
         // Test Permalink is a invalid url
-        yield return new object[]
-        {
+        yield return
+        [
             Builder<Posts>.CreateNew()
                 .With(x => x.Title = "test")
                 .With(x => x.Permalink = "test")
                 .Build(),
             1, "Perma link should be a valid URL"
-        };
-
-       
-
+        ];
     }
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-  
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }

@@ -3,7 +3,7 @@
         <Authors>Geekiam</Authors>
         <TargetFramework>net8.0</TargetFramework>
         <Title>Geekiam Feeds</Title>
-        <Description>Feed Management Database </Description>
+        <Description>Feed Management Database</Description>
         <RepositoryType>git</RepositoryType>
         <PackageTags>rss, dotnet, feeds</PackageTags>
         <RepositoryUrl>https://github.com/geekiam/feed-db</RepositoryUrl>

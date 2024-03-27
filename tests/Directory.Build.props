@@ -5,20 +5,20 @@
         <IsTestProject>true</IsTestProject>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="FluentValidation" />
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions"  />
-        <PackageReference Include="FluentAssertions" />
+        <PackageReference Include="FluentValidation"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions"/>
+        <PackageReference Include="FluentAssertions"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk"/>
         <PackageReference Include="NSubstitute"/>
-        <PackageReference Include="xunit" />
-        <PackageReference Include="xunit.runner.visualstudio" />
-        <PackageReference Include="NBuilder" />
-        <PackageReference Include="Moq" />
-        <PackageReference Include="Shouldly" />
-        <PackageReference Include="coverlet.collector" />
-        <PackageReference Include="coverlet.msbuild"  />
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.runner.visualstudio"/>
+        <PackageReference Include="NBuilder"/>
+        <PackageReference Include="Moq"/>
+        <PackageReference Include="Shouldly"/>
+        <PackageReference Include="coverlet.collector"/>
+        <PackageReference Include="coverlet.msbuild"/>
     </ItemGroup>
     <ItemGroup>
-        <Using Include="Xunit" />
+        <Using Include="Xunit"/>
     </ItemGroup>
 </Project>

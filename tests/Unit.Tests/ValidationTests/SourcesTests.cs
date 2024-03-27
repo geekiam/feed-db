@@ -40,7 +40,7 @@ public class SourcesTestData : IEnumerable<object[]>
                 .Build(),
             1, "Domain is the same as Name and name is an absolute URL"
         };
-        
+
         yield return new object[]
         {
             Builder<Sources>.CreateNew()
@@ -49,7 +49,7 @@ public class SourcesTestData : IEnumerable<object[]>
                 .Build(),
             1, "Domain is not an absolute URL"
         };
-        
+
         /*yield return new object[]
         {
             Builder<Sources>.CreateNew()
@@ -58,7 +58,7 @@ public class SourcesTestData : IEnumerable<object[]>
               .Build(),
             2, "Domain is the same as FeedLink"
         };*/
-        
+
         /*yield return new object[]
         {
             Builder<Sources>.CreateNew()
@@ -68,13 +68,10 @@ public class SourcesTestData : IEnumerable<object[]>
                 .Build(),
             1, "FeedLink should be relative"
         };*/
-        
-     
-        
     }
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-  
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }
-    

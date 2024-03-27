@@ -4,9 +4,11 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var GITHUB_TOKEN = Argument("GITHUB_TOKEN", "");
+var NUGET_API_KEY = Argument("NUGET_API_KEY", "");
 string version = String.Empty;
 const string TEST_COVERAGE_OUTPUT_DIR = "coverage";
-
+var solution = "Feeds.sln";
 Task("Clean")
     .Does(() => {
  
@@ -17,7 +19,7 @@ Task("Clean")
     else
     {
         CleanDirectories("./coverage");
-        DotNetClean("./Feeds.sln");
+        DotNetClean(solution);
     }
 });
 
@@ -125,11 +127,12 @@ Task("Pack")
    var settings = new DotNetPackSettings
     {
         Configuration = configuration,
-        OutputDirectory = "./.artifacts",
+        OutputDirectory = "./artifacts",
         NoBuild = true,
         NoRestore = true,
         MSBuildSettings = new DotNetMSBuildSettings()
                         .WithProperty("PackageVersion", version)
+                        .WithProperty("Copyright", $"© Copyright geekiam.io {DateTime.Now.Year}")
                         .WithProperty("Version", version)
     };
     
@@ -141,11 +144,11 @@ Task("Pack")
   .Does(context => {
   if (BuildSystem.GitHubActions.IsRunningOnGitHubActions)
    {
-      foreach(var file in GetFiles("./.artifacts/*.nupkg"))
+      foreach(var file in GetFiles("./artifacts/*.nupkg"))
       {
         Information("Publishing {0}...", file.GetFilename().FullPath);
         DotNetNuGetPush(file, new DotNetNuGetPushSettings {
-              ApiKey = EnvironmentVariable("GITHUB_TOKEN"),
+              ApiKey = GITHUB_TOKEN,
               Source = "https://nuget.pkg.github.com/geekiam/index.json",
               SkipDuplicate = true
         });
@@ -157,11 +160,11 @@ Task("PublishNuget")
  .Does(context => {
    if (BuildSystem.GitHubActions.IsRunningOnGitHubActions)
    {
-     foreach(var file in GetFiles("./.artifacts/*.nupkg"))
+     foreach(var file in GetFiles("./artifacts/*.nupkg"))
      {
        Information("Publishing {0}...", file.GetFilename().FullPath);
        DotNetNuGetPush(file, new DotNetNuGetPushSettings {
-          ApiKey = context.EnvironmentVariable("NUGET_API_KEY"),
+          ApiKey = NUGET_API_KEY,
           Source = "https://api.nuget.org/v3/index.json",
           SkipDuplicate = true
        });

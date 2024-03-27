@@ -3,7 +3,6 @@ using Threenine.Configurations.PostgreSql;
 
 namespace Geekiam.Persistence.Configurations;
 
-public class ScheduleTypesConfiguration  : ValueListTypeConfiguration<ScheduleTypes> 
+internal class ScheduleTypesConfiguration : ValueListTypeConfiguration<ScheduleTypes>
 {
-    
 }

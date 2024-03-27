@@ -28,8 +28,10 @@ public class DomainNameTestData : IEnumerable<object[]>
         yield return new object[] { "test.com.au", true };
         yield return new object[] { "test.gov", true };
         yield return new object[] { "test.gov.uk", true };
-      
     }
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }

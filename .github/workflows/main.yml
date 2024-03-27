@@ -18,16 +18,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Run cake
-        shell : bash
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: |
-          dotnet new tool-manifest
-          dotnet tool install Cake.Tool
-          dotnet tool restore
-          dotnet cake main.cake
+      - name: Run the Cake script
+        uses: cake-build/cake-action@v2
+        with:
+          script-path: build.cake
+          arguments: |
+            GITHUB_TOKEN: ${{ github.token }}
+            NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+     
       - name: Create check run with code coverage Markdown report
         uses: LouisBrunner/checks-action@v1.6.2
         if: always()

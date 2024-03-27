@@ -20,15 +20,18 @@ public class RelativePathTestData : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()
     {
-        yield return new object[] { "/test", true };
-        yield return new object[] { "test/feed.xml", true };
-        yield return new object[] { "/some-random-permalink", true };
-        yield return new object[] { "/feed/", true };
-        yield return new object[] { "garywoodfine.com", false };
-        yield return new object[] { "https://threenine.co.uk", false };
-        yield return new object[] { "ftp://threenine.co.uk", false };
-        yield return new object[] { "/test-1234-test--3", true };
+        yield return ["/test", true];
+        yield return ["test/feed.xml", true];
+        yield return ["/some-random-permalink", true];
+        yield return ["/feed/", true];
+        yield return ["garywoodfine.com", false];
+        yield return ["https://threenine.co.uk", false];
+        yield return ["ftp://threenine.co.uk", false];
+        yield return ["/test-1234-test--3", true];
     }
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }

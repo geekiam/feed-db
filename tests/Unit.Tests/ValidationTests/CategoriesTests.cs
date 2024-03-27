@@ -24,7 +24,6 @@ public class CategoriesTestData : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()
     {
-    
         yield return new object[]
         {
             Builder<Categories>.CreateNew()
@@ -32,12 +31,10 @@ public class CategoriesTestData : IEnumerable<object[]>
                 .Build(),
             1, "name is required"
         };
-        
-
-
-
     }
 
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }

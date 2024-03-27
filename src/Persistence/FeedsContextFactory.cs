@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace Geekiam.Persistence;
+
 [ExcludeFromCodeCoverage]
 internal class FeedsContextFactory : IDesignTimeDbContextFactory<FeedsContext>
 {
@@ -10,7 +11,7 @@ internal class FeedsContextFactory : IDesignTimeDbContextFactory<FeedsContext>
     {
         DbContextOptionsBuilder<FeedsContext> dbContextOptionsBuilder =
             new();
-        
+
         dbContextOptionsBuilder.UseNpgsql(ConnectionStringNames.LocalBuild);
         return new FeedsContext(dbContextOptionsBuilder.Options);
     }
