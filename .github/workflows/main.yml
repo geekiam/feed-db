@@ -28,7 +28,7 @@ jobs:
      
       - name: Create check run with code coverage Markdown report
         uses: LouisBrunner/checks-action@v2.0.0
-        if: always()
+        if: success()
         with:
           token: ${{ github.token }}
           name: Code Coverage Summary
