@@ -41,6 +41,7 @@ jobs:
            name: nuget-packages
            path: artifacts
   publish:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Download All Artifacts
