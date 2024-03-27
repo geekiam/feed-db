@@ -4,8 +4,6 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var GITHUB_TOKEN = Argument("GITHUB_TOKEN", "");
-var NUGET_API_KEY = Argument("NUGET_API_KEY", "");
 string version = String.Empty;
 const string TEST_COVERAGE_OUTPUT_DIR = "coverage";
 var solution = "Feeds.sln";
@@ -115,7 +113,6 @@ Task("Test")
            ArgumentCustomization = args => args.Append($"-reportTypes:MarkdownSummaryGithub")
         };
         ReportGenerator(glob, summaryDirectory, summarySettings);
-        //BuildSystem.GitHubActions.Commands.UploadArtifact(summaryDirectory,  "bubababa");
       
       }
 });
@@ -136,50 +133,13 @@ Task("Pack")
                         .WithProperty("Version", version)
     };
     
-    DotNetPack("./Feeds.sln", settings);
+    DotNetPack(solution, settings);
  });
- 
- Task("PublishGithub")
-  .IsDependentOn("Pack")
-  .Does(context => {
-  if (BuildSystem.GitHubActions.IsRunningOnGitHubActions)
-   {
-      foreach(var file in GetFiles("./artifacts/*.nupkg"))
-      {
-        Information("Publishing {0}...", file.GetFilename().FullPath);
-        DotNetNuGetPush(file, new DotNetNuGetPushSettings {
-              ApiKey = GITHUB_TOKEN,
-              Source = "https://nuget.pkg.github.com/geekiam/index.json",
-              SkipDuplicate = true
-        });
-      } 
-   } 
- }); 
-Task("PublishNuget")
- .IsDependentOn("Pack")
- .Does(context => {
-   if (BuildSystem.GitHubActions.IsRunningOnGitHubActions)
-   {
-     foreach(var file in GetFiles("./artifacts/*.nupkg"))
-     {
-       Information("Publishing {0}...", file.GetFilename().FullPath);
-       DotNetNuGetPush(file, new DotNetNuGetPushSettings {
-          ApiKey = NUGET_API_KEY,
-          Source = "https://api.nuget.org/v3/index.json",
-          SkipDuplicate = true
-       });
-     }
-   }
- }); 
-
-
 
 Task("Default")
        .IsDependentOn("Clean")
        .IsDependentOn("Restore")
        .IsDependentOn("Build")
        .IsDependentOn("Test")
-       .IsDependentOn("Pack")
-       .IsDependentOn("PublishGithub")
-       .IsDependentOn("PublishNuget");
+       .IsDependentOn("Pack");
 RunTarget(target);

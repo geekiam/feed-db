@@ -35,3 +35,23 @@ jobs:
           conclusion: ${{ job.status }}
           output: '{"summary":"Geekiam Feeds Database Code Coverage Summary"}'
           output_text_description_file: coverage/summary/SummaryGithub.md
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+           name: nuget-packages
+           path: artifacts
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Run the Cake script
+        uses: cake-build/cake-action@v2
+        with:
+          script-path: publish.cake
+          arguments: |
+            GITHUB_TOKEN: ${{ github.token }}
+            NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  
+      
